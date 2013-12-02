@@ -27,20 +27,55 @@
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="0,0,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            
+                        
             <ScrollViewer x:Name="ImageCarousel"
                           Grid.Row="0"
                           ManipulationMode="Control"
+                          IsHitTestVisible="False"
                           HorizontalScrollBarVisibility="Hidden"
-                          VerticalScrollBarVisibility="Hidden"
+                          VerticalScrollBarVisibility="Disabled"
                           >
                 <StackPanel x:Name="ImageList" Orientation="Horizontal" />
             </ScrollViewer>
+
+            <Button Content="&lt;"
+                    x:Name="ButtonLeft"
+                    Grid.Row="0"
+                    FontSize="30"
+                    FontWeight="Bold"
+                    Background="LightGray"
+                    Foreground="DarkSlateGray"
+                    BorderThickness="0"
+                    Margin="0"
+                    Padding="0"
+                    Height="70"
+                    Width="70"
+                    HorizontalAlignment="Left"
+                    VerticalContentAlignment="Top"
+                    Opacity="0.75" Click="ButtonLeft_Click"                    
+                    />
+
+            <Button Content="&gt;"
+                    x:Name="ButtonRight"                    
+                    Grid.Row="0"
+                    FontSize="30"
+                    FontWeight="Bold"
+                    Background="LightGray"
+                    Foreground="DarkSlateGray"
+                    BorderThickness="0"
+                    Margin="0"
+                    Padding="0"
+                    Height="70"
+                    Width="70"
+                    HorizontalAlignment="Right"
+                    VerticalContentAlignment="Top"
+                    Opacity="0.75"
+                    Click="ButtonRight_Click"                    
+                    />
         </Grid>
     </Grid>
 
