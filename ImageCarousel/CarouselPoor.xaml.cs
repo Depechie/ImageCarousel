@@ -24,6 +24,7 @@ namespace ImageCarousel
 
             this.InitImages();
             this.LoadImages();
+            this.ValidateNavigation();
 
             _scrollAnimation = new DoubleAnimation()
             {
@@ -36,7 +37,6 @@ namespace ImageCarousel
 
             _scrollViewerStoryboard = new Storyboard();
             _scrollViewerStoryboard.Children.Add(_scrollAnimation);
-            _scrollViewerStoryboard.Completed += _scrollViewerStoryboard_Completed;            
         }
 
         private static void OnHorizontalOffsetChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -47,19 +47,21 @@ namespace ImageCarousel
 
         private void OnHorizontalOffsetChanged(DependencyPropertyChangedEventArgs e)
         {
+            this.ValidateNavigation();
             this.ImageCarousel.ScrollToHorizontalOffset((double)e.NewValue);
         }
 
-        private void _scrollViewerStoryboard_Completed(object sender, EventArgs e)
+        private void ValidateNavigation()
         {
-            //var itemOntdek = this.ImagesOntdek.Children[0];
-            //this.ImagesOntdek.Children.RemoveAt(0);
-            //ImageCarousel.ScrollToHorizontalOffset(0);
-            //this.ImagesOntdek.Children.Add(itemOntdek);
+            if (this.Indicator.SelectedPivotIndex == 0)
+                this.ButtonLeft.Visibility = Visibility.Collapsed;
+            else
+                this.ButtonLeft.Visibility = Visibility.Visible;
 
-            //++this.IndicatorOntdek.SelectedPivotIndex;
-            //if (this.IndicatorOntdek.SelectedPivotIndex == this.IndicatorOntdek.ItemsCount)
-            //    this.IndicatorOntdek.SelectedPivotIndex = 0;
+            if (this.Indicator.SelectedPivotIndex == this.Indicator.ItemsCount - 1)
+                this.ButtonRight.Visibility = Visibility.Collapsed;
+            else
+                this.ButtonRight.Visibility = Visibility.Visible;
         }
 
         private void LoadImages()
@@ -79,16 +81,21 @@ namespace ImageCarousel
         private void ButtonLeft_Click(object sender, RoutedEventArgs e)
         {
             var startPosition = this.ImageCarousel.HorizontalOffset;
-            _scrollAnimation.From = startPosition;
-            _scrollAnimation.To = startPosition - 480;
-            _scrollViewerStoryboard.Begin();
+            if (startPosition > 0)
+            {
+                _scrollAnimation.From = startPosition;
+                _scrollAnimation.To = startPosition - 480;
+                --this.Indicator.SelectedPivotIndex;
+                _scrollViewerStoryboard.Begin();
+            }
         }
 
         private void ButtonRight_Click(object sender, RoutedEventArgs e)
         {
-            var startPosition = this.ImageCarousel.HorizontalOffset;
+            var startPosition = this.ImageCarousel.HorizontalOffset;            
             _scrollAnimation.From = 0 + startPosition;
             _scrollAnimation.To = 480 + startPosition;
+            ++this.Indicator.SelectedPivotIndex;
             _scrollViewerStoryboard.Begin();
         }
     }
