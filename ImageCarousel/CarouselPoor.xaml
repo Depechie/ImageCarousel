@@ -15,14 +15,14 @@
     shell:SystemTray.IsVisible="True">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot" Background="#FFA87D7D">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+        <StackPanel Grid.Row="0" Margin="12,17,0,12">
             <TextBlock Text="POOR MANS IMAGE CAROUSEL" Style="{StaticResource PhoneTextNormalStyle}"/>
         </StackPanel>
 
@@ -31,6 +31,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
                         
             <ScrollViewer x:Name="ImageCarousel"
@@ -84,6 +85,19 @@
                     Opacity="0.75"
                     Click="ButtonRight_Click"                    
                     />
+            
+            <RichTextBox Grid.Row="2" VerticalAlignment="Top" Margin="12,6,12,0">
+                <Paragraph>
+                    <Run FontSize="28">
+                        What is Cats in Sinks?
+                    </Run>
+                    <LineBreak />
+                    <LineBreak />
+                    <Run>
+                        It's obvious. It's about cats. And kittens. Who like sinks. And basins.
+                    </Run>
+                </Paragraph>
+            </RichTextBox>
         </Grid>
     </Grid>
 
