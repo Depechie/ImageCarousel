@@ -41,6 +41,7 @@ namespace ImageCarousel
 
         private static void OnHorizontalOffsetChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
+            //Pass the value through from this static method to the ScrollViewer
             CarouselPoor app = d as CarouselPoor;
             app.OnHorizontalOffsetChanged(e);
         }
