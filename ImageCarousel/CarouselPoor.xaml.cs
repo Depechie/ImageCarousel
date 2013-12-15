@@ -32,6 +32,7 @@ namespace ImageCarousel
                 Duration = TimeSpan.FromSeconds(0.5)
             };
 
+            //Define the element and element property this animation will target!
             Storyboard.SetTarget(_scrollAnimation, this);
             Storyboard.SetTargetProperty(_scrollAnimation, new PropertyPath(_horizontalOffsetProperty));
 
